@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: bgmi-pro-coach-backend
+    runtime: python
+    rootDir: BGMI_PRO_COACH/backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    plan: free
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false          # you'll paste this in the Render dashboard
+      - key: ANTHROPIC_BASE_URL
+        sync: false          # optional — only needed for SAP proxy
+      - key: ALLOWED_ORIGINS
+        sync: false          # paste your Vercel URL here after deploy, e.g. https://bgmi-pro-coach.vercel.app

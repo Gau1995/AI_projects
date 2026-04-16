@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS Variables ─────────────────────────────────────────────────────────── */
+:root {
+  --orange: #FF6A00;
+  --orange-dim: #CC5500;
+  --bg: #0D0D0D;
+  --surface: #141414;
+  --border: rgba(255, 106, 0, 0.25);
+  --glow: rgba(255, 106, 0, 0.4);
+}
+
+/* ── Base ───────────────────────────────────────────────────────────────────── */
+html,
+body {
+  background-color: var(--bg);
+  color: #e5e5e5;
+  font-family: 'Inter', system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+/* Hex grid background — two offset hexagons in a single 56×100 tile */
+body {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 0 L56 16 L56 50 L28 66 L0 50 L0 16 Z' fill='none' stroke='rgba(255,106,0,0.07)' stroke-width='1'/%3E%3Cpath d='M28 50 L56 66 L56 100 L28 116 L0 100 L0 66 Z' fill='none' stroke='rgba(255,106,0,0.07)' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 56px 100px;
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--orange-dim); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--orange); }
+
+/* ── Components ─────────────────────────────────────────────────────────────── */
+@layer components {
+  .neon-card {
+    @apply rounded-xl border p-5 transition-all duration-200;
+    background: var(--surface);
+    border-color: var(--border);
+  }
+  .neon-card:hover,
+  .neon-card:focus-within {
+    border-color: rgba(255, 106, 0, 0.5);
+    box-shadow: 0 0 16px var(--glow);
+  }
+
+  .neon-btn {
+    @apply rounded-lg px-6 py-3 font-bold tracking-wide transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed;
+    background: linear-gradient(135deg, var(--orange), #ff9500);
+    color: #0D0D0D;
+    box-shadow: 0 0 10px rgba(255, 106, 0, 0.35);
+  }
+  .neon-btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 0 22px rgba(255, 106, 0, 0.65);
+  }
+  .neon-btn:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  .neon-input {
+    @apply w-full rounded-lg border bg-transparent px-3 py-2 text-sm text-white outline-none transition-all duration-200 placeholder:text-gray-600;
+    border-color: var(--border);
+  }
+  .neon-input:focus {
+    border-color: var(--orange);
+    box-shadow: 0 0 8px var(--glow);
+  }
+
+  .pill-btn {
+    @apply rounded-full border px-4 py-1.5 text-sm font-medium transition-all duration-150;
+    border-color: var(--border);
+    color: #888;
+  }
+  .pill-btn:hover {
+    border-color: rgba(255, 106, 0, 0.5);
+    color: var(--orange);
+  }
+  .pill-btn.active {
+    background: var(--orange);
+    border-color: var(--orange);
+    color: #0D0D0D;
+    font-weight: 700;
+  }
+}
+
+/* ── Streaming cursor ───────────────────────────────────────────────────────── */
+.streaming-cursor::after {
+  content: "▋";
+  color: var(--orange);
+  animation: blink 0.8s step-end infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ── Prose overrides (gaming theme) ────────────────────────────────────────── */
+.prose-gaming {
+  @apply prose prose-invert max-w-none;
+}
+.prose-gaming h1,
+.prose-gaming h2,
+.prose-gaming h3 {
+  color: var(--orange);
+}
+.prose-gaming strong {
+  color: #ffd580;
+}
+.prose-gaming a {
+  color: var(--orange);
+}
+.prose-gaming table {
+  border-collapse: collapse;
+}
+.prose-gaming th {
+  background: rgba(255, 106, 0, 0.15);
+  color: var(--orange);
+  border: 1px solid rgba(255, 106, 0, 0.3);
+  padding: 0.4rem 0.75rem;
+}
+.prose-gaming td {
+  border: 1px solid rgba(255, 106, 0, 0.15);
+  padding: 0.4rem 0.75rem;
+}
+.prose-gaming tr:nth-child(even) td {
+  background: rgba(255, 255, 255, 0.02);
+}
+.prose-gaming hr {
+  border-color: rgba(255, 106, 0, 0.2);
+}
+.prose-gaming code {
+  color: #ff9500;
+  background: rgba(255, 106, 0, 0.1);
+  padding: 0.1em 0.3em;
+  border-radius: 4px;
+}
