@@ -2,7 +2,7 @@ services:
   - type: web
     name: bgmi-pro-coach-backend
     runtime: python
-    rootDir: BGMI_PRO_COACH/backend
+    rootDir: backend
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     plan: free
